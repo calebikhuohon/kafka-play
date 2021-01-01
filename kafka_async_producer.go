@@ -25,8 +25,8 @@ func main() {
 
 	config.Producer.Retry.Max = 5
 
-	brokers := []string{"localhost:9092", "localhost:9093", "localhost:9094"}
-	sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
+	brokers := []string{"localhost:9092"}
+	//sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
 
 	asyncProducer, err := sarama.NewAsyncProducer(brokers, config)
 	if err != nil {
@@ -72,7 +72,7 @@ func main() {
 				exitProgram <- struct{}{}
 			}
 
-			log.Printf("Published: %d; Errors: %d\n", nPublished, nErrors)
+			log.Printf("time: %d; Published: %d; Errors: %d\n",time.Now(), nPublished, nErrors)
 		}
 	}()
 
